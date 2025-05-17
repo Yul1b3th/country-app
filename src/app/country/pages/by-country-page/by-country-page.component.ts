@@ -3,9 +3,9 @@ import { SearchInputComponent } from '../../components/search-input/search-input
 import { CountryListComponent } from '../../components/country-list/country-list.component';
 
 @Component({
-  selector: 'app-by-capital-page',
+  selector: 'app-by-country',
   standalone: true,
   imports: [SearchInputComponent, CountryListComponent],
-  templateUrl: './by-capital-page.component.html',
+  templateUrl: './by-country-page.component.html',
 })
-export class ByCapitalPageComponent {}
+export default class ByCountryPageComponent {}
