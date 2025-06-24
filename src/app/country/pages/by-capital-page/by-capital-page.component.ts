@@ -23,12 +23,16 @@ export class ByCapitalPageComponent {
     this.isLoading.set(true);
     this.isError.set(null);
 
-    this.countryService.searchByCapital(query).subscribe((countries) => {
-      this.isLoading.set(false);
-      this.countries.set(countries);
-
-      // const c = CountryMapper.mapRestCountryArrayToCountryArray(countries);
-      // console.log('Countries:', c);
+    this.countryService.searchByCapital(query).subscribe({
+      next: (countries) => {
+        this.isLoading.set(false);
+        this.countries.set(countries);
+      },
+      error: (error) => {
+        this.isLoading.set(false);
+        this.isError.set(error);
+        this.countries.set([]);
+      },
     });
   }
 }
