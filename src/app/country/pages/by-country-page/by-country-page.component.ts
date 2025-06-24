@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { SearchInputComponent } from '../../components/search-input/search-input.component';
 import { CountryListComponent } from '../../components/country-list/country-list.component';
-import { RESTCountry } from '../../interfaces/rest-countries.interface';
+import type { Country } from '../../interfaces/country.interface';
 
 @Component({
   selector: 'app-by-country',
@@ -10,5 +10,5 @@ import { RESTCountry } from '../../interfaces/rest-countries.interface';
   templateUrl: './by-country-page.component.html',
 })
 export default class ByCountryPageComponent {
-  countries = input.required<RESTCountry[]>();
+  countries = input.required<Country[]>();
 }
