@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { RESTCountry } from '../interfaces/rest-countries.interface';
 import { Observable } from 'rxjs';
+import { RESTCountry } from '../interfaces/rest-countries.interface';
 
 const API_URL = 'https://restcountries.com/v3.1';
 

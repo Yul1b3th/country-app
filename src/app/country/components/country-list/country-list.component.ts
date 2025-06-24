@@ -8,5 +8,5 @@ import { RESTCountry } from '../../interfaces/rest-countries.interface';
   templateUrl: './country-list.component.html',
 })
 export class CountryListComponent {
-  // countries = input.required<RESTCountry[]>();
+  countries = input.required<RESTCountry[]>();
 }
