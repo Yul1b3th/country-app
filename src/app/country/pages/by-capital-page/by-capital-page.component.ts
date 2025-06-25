@@ -22,38 +22,38 @@ export class ByCapitalPageComponent {
       return this.countryService.searchByCapital(params.query);
     },
   });
-
-  // countryResource = resource({
-  //   params: () => ({ query: this.query() }),
-  //   loader: async ({ params }) => {
-  //     if (!params.query) return [];
-
-  //     return await firstValueFrom(
-  //       this.countryService.searchByCapital(params.query),
-  //     );
-  //   },
-  // });
-
-  // isLoading = signal(false);
-  // isError = signal<string | null>(null);
-  // countries = signal<Country[]>([]);
-
-  // onSearch(query: string) {
-  //   if (this.isLoading()) return;
-
-  //   this.isLoading.set(true);
-  //   this.isError.set(null);
-
-  //   this.countryService.searchByCapital(query).subscribe({
-  //     next: (countries) => {
-  //       this.isLoading.set(false);
-  //       this.countries.set(countries);
-  //     },
-  //     error: (error) => {
-  //       this.isLoading.set(false);
-  //       this.isError.set(error);
-  //       this.countries.set([]);
-  //     },
-  //   });
-  // }
 }
+
+// countryResource = resource({
+//   params: () => ({ query: this.query() }),
+//   loader: async ({ params }) => {
+//     if (!params.query) return [];
+
+//     return await firstValueFrom(
+//       this.countryService.searchByCapital(params.query),
+//     );
+//   },
+// });
+
+// isLoading = signal(false);
+// isError = signal<string | null>(null);
+// countries = signal<Country[]>([]);
+
+// onSearch(query: string) {
+//   if (this.isLoading()) return;
+
+//   this.isLoading.set(true);
+//   this.isError.set(null);
+
+//   this.countryService.searchByCapital(query).subscribe({
+//     next: (countries) => {
+//       this.isLoading.set(false);
+//       this.countries.set(countries);
+//     },
+//     error: (error) => {
+//       this.isLoading.set(false);
+//       this.isError.set(error);
+//       this.countries.set([]);
+//     },
+//   });
+// }

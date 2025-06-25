@@ -1,3 +1,7 @@
+<pre>countries: {{ countries().length }}</pre>
+<pre>isLoading: {{ isLoading() }}</pre>
+<pre>errorMessage: {{ errorMessage() }}</pre>
+<pre>isEmpty: {{ isEmpty() }}</pre>
 <section class="mt-5">
   <table class="table table-md mt-2 w-full">
     <thead>
@@ -32,6 +36,32 @@
               class="link-primary cursor-pointer"
               >Más información</a
             >
+          </td>
+        </tr>
+      }
+
+      @if (errorMessage()) {
+        <tr>
+          <td colspan="8" class="text-center">
+            {{ errorMessage() }}
+          </td>
+        </tr>
+      }
+
+      @if (countries().length === 0 && !isLoading()) {
+        <tr>
+          <td colspan="8" class="text-center">No se encontraron resultados.</td>
+        </tr>
+      }
+
+      @if (isLoading()) {
+        <tr>
+          <td colspan="8" class="text-center">
+            <span
+              class="loading loading-spinner loading-xl"
+              role="status"
+            ></span>
+            <p>Buscando países...</p>
           </td>
         </tr>
       }
