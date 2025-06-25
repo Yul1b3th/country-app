@@ -46,4 +46,36 @@ export class CountryService {
       }),
     );
   }
+
+  // searchCountryByAlphaCode(code: string): Observable<Country> {
+  //   const url = `${API_URL}/alpha/${code}`;
+
+  //   return this.http.get<RESTCountry[]>(url).pipe(
+  //     map((resp) => CountryMapper.mapRestCountryArrayToCountryArray(resp)),
+  //     delay(3000),
+  //     map((countries) => {
+  //       const country = countries.at(0);
+  //       if (!country) {
+  //         throw new Error(`No se encontró el país con el código ${code}`);
+  //       }
+  //       return country;
+  //     }),
+  //   );
+  // }
+
+  searchCountryByAlphaCode(code: string): Observable<Country | undefined> {
+    const url = `${API_URL}/alpha/${code}`;
+
+    return this.http.get<RESTCountry[]>(url).pipe(
+      map((resp) => CountryMapper.mapRestCountryArrayToCountryArray(resp)),
+      map((countries) => countries.at(0)),
+      catchError((error) => {
+        console.log('Error fetching ', error);
+
+        return throwError(
+          () => new Error(`No se pudo obtener países con ese código ${code}`),
+        );
+      }),
+    );
+  }
 }

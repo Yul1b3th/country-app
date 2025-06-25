@@ -2,7 +2,7 @@ import type { Country } from '../interfaces/country.interface';
 import type { RESTCountry } from '../interfaces/rest-countries.interface';
 
 export class CountryMapper {
-  // static RestCountry => Cuntry
+  // static RestCountry => Country
   static mapRestCountryToCountry(restCountry: RESTCountry): Country {
     return {
       capital: restCountry.capital.join(','),
@@ -11,14 +11,16 @@ export class CountryMapper {
       flagSvg: restCountry.flags.svg,
       name: restCountry.translations['spa'].common ?? 'No Spanish Name',
       population: restCountry.population,
+
+      region: restCountry.region,
+      subRegion: restCountry.subregion,
     };
   }
-  // static RestCountry[] => Cuntry[]
+
+  // static RestCountry[] => Country[]
   static mapRestCountryArrayToCountryArray(
     restCountries: RESTCountry[],
   ): Country[] {
-    return restCountries.map((country) =>
-      this.mapRestCountryToCountry(country),
-    );
+    return restCountries.map(this.mapRestCountryToCountry);
   }
 }
