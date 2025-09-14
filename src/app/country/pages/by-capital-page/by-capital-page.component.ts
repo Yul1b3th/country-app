@@ -6,7 +6,7 @@ import {
   signal,
 } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom, of } from 'rxjs';
 import { SearchInputComponent } from '../../components/search-input/search-input.component';
 import { CountryListComponent } from '../../components/country-list/country-list.component';
@@ -19,8 +19,10 @@ import { CountryService } from '../../services/country.service';
   templateUrl: './by-capital-page.component.html',
 })
 export class ByCapitalPageComponent {
-  countryService = inject(CountryService);
   activatedRoute = inject(ActivatedRoute);
+  router = inject(Router);
+  countryService = inject(CountryService);
+
   queryParam = this.activatedRoute.snapshot.queryParamMap.get('query') ?? '';
   query = linkedSignal<string>(() => this.queryParam);
 
@@ -30,6 +32,16 @@ export class ByCapitalPageComponent {
       console.log({ query: params.query });
 
       if (!params.query) return of([]);
+
+      // debemos actualizar la url del navegador
+      this.router.navigate(['/country/by-capital'], {
+        queryParams: {
+          query: params.query,
+          hola: 'mundo',
+          saludos: 'yulibeth',
+        },
+      });
+
       return this.countryService.searchByCapital(params.query);
     },
   });
