@@ -13,6 +13,7 @@ const API_URL = 'https://restcountries.com/v3.1';
 export class CountryService {
   private http = inject(HttpClient);
   private queryCacheCapital = new Map<string, Country[]>(); // la llave es un string y va apuntar a un arreglo de Country
+  private queryCacheCountry = new Map<string, Country[]>(); //
 
   searchByCapital(query: string): Observable<Country[]> {
     query = query.trim().toLowerCase();
@@ -45,11 +46,22 @@ export class CountryService {
   searchByCountry(query: string): Observable<Country[]> {
     query = query.trim().toLowerCase();
 
+    //  Verificación del cache
+    if (this.queryCacheCountry.has(query)) {
+      return of(this.queryCacheCountry.get(query) ?? []);
+    }
+
+    console.log(`Llegando al servidor por ${query}`);
+
     return this.http.get<RESTCountry[]>(`${API_URL}/name/${query}`).pipe(
       map((restCountries) =>
         CountryMapper.mapRestCountryArrayToCountryArray(restCountries),
       ),
       delay(3000),
+      tap((countries) => {
+        this.queryCacheCountry.set(query, countries); // guardar en el cache
+        console.log(this.queryCacheCountry);
+      }),
       catchError((error) => {
         console.error('Error fetching', error);
         return throwError(
