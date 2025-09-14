@@ -18,6 +18,8 @@ export default class ByCountryPageComponent {
   countryResource = rxResource({
     params: () => ({ query: this.query() }),
     stream: ({ params }) => {
+      console.log(params);
+
       if (!params.query) return of([]);
       return this.countryService.searchByCountry(params.query);
     },
